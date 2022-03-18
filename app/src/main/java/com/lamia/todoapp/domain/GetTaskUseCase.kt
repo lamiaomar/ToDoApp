@@ -9,7 +9,7 @@ class GetTaskUseCase @Inject constructor(
     private val repository: TaskRepository
 ) {
 
-    suspend operator fun invoke(): Flow<List<Task>>{
+    suspend operator fun invoke(): List<Task>{
         return repository.getTasks()
     }
 

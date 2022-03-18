@@ -17,7 +17,7 @@ class TaskRepository @Inject constructor(
         return taskDao.deleteTask(task)
     }
 
-    suspend fun getTasks(): Flow<List<Task>> =
+    suspend fun getTasks(): List<Task> =
         withContext(ioDispatcher){
             taskDao.getTasks()
         }

@@ -10,3 +10,8 @@ data class Task(
     val title: String = "",
     val description: String = ""
 )
+
+data class Tasks(
+    val taskList: List<Task> = listOf(),
+    val xx :List<String> = listOf<String>("ff","GG","ggg")
+)

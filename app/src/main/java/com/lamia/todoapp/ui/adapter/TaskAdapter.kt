@@ -11,19 +11,19 @@ import com.lamia.todoapp.databinding.TaskBinding
 import com.lamia.todoapp.model.Task
 
 class TaskAdapter (
-    val delete: (task: Task) -> Unit
+
 ): ListAdapter<Task, TaskAdapter.TaskViewHolder>(DiffCallback){
 
-
+//    val delete: (task: Task) -> Unit
     class TaskViewHolder(
         private var binding:
         TaskBinding
     ): RecyclerView.ViewHolder(binding.root){
         fun bind(task: Task){
             binding.result = task
-            binding.title.text = task.title
-            binding.description.text = task.description
-//            binding.executePendingBindings()
+//            binding.title.text = task.title
+//            binding.description.text = task.description
+            binding.executePendingBindings()
         }
 
 //        val addbutton : Button = binding.
