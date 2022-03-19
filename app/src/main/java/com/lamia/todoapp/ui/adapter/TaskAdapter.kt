@@ -3,30 +3,32 @@ package com.lamia.todoapp.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Button
+import android.widget.ImageView
+import androidx.cardview.widget.CardView
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.lamia.todoapp.databinding.TaskBinding
 import com.lamia.todoapp.model.Task
+import com.lamia.todoapp.ui.TaskFragmentDirections
 
 class TaskAdapter (
-
+    val delete: (task: Task) -> Unit
 ): ListAdapter<Task, TaskAdapter.TaskViewHolder>(DiffCallback){
 
-//    val delete: (task: Task) -> Unit
     class TaskViewHolder(
         private var binding:
         TaskBinding
     ): RecyclerView.ViewHolder(binding.root){
         fun bind(task: Task){
             binding.result = task
-//            binding.title.text = task.title
-//            binding.description.text = task.description
+           val id =  task.id
             binding.executePendingBindings()
         }
+    val task: CardView = binding.taskCard
+    val delete: ImageView = binding.delete
 
-//        val addbutton : Button = binding.
     }
 
     companion object DiffCallback : DiffUtil.ItemCallback<Task>() {
@@ -47,29 +49,19 @@ class TaskAdapter (
     }
 
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
-        val bookPhoto = getItem(position)
-        holder.bind(bookPhoto)
+        val task = getItem(position)
+        holder.bind(task)
 
-//        holder
+        holder.task.setOnClickListener {
+            val action =
+                TaskFragmentDirections.actionTaskFragmentToTaskDetailFragment(task.id!!)
+            holder.task.findNavController().navigate(action)
+        }
 
-//        holder.bookThumb.setOnClickListener {
-//            val action =
-//                BookShelfFragmentDirections.actionBookShelfFragmentToDetailsUserBookFragment(
-//                    position
-//                )
-//            holder.bookThumb.findNavController().navigate(action)
-//        }
-//
-//        holder.deleteBook.setOnClickListener {
-//            delete(bookPhoto)
+        holder.delete.setOnClickListener {
+            delete(task)
 //            notifyItemRemoved(position)
-//        }
-//
-//        holder.shareBook.setOnClickListener {
-//            share(bookPhoto)
-//
-//        }
-
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {

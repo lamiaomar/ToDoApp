@@ -15,36 +15,59 @@ class TaskViewModel @Inject constructor(
     private val tasksUseCases: TasksUseCases
 ) : ViewModel() {
 
+    /**
+     * Stream of type Tasks() to pass the tasks list
+     */
     private val _taskList = MutableStateFlow(Tasks())
     val taskList: StateFlow<Tasks> = _taskList.asStateFlow()
 
-    var _allTask =  MutableLiveData<List<Task>>()
-    val allTask : LiveData<List<Task>> = _allTask
+    private val _taskDetail = MutableStateFlow(Task())
+    val taskDetail: StateFlow<Task> = _taskDetail.asStateFlow()
 
     init {
         getTasks()
-        viewModelScope.launch {
-//            _allTask = tasksUseCases.getTasksUseCases.invoke().asLiveData()
-        }
     }
 
+    /**
+     * getTask() fun is the first to be execute when the viewModel
+     * is instantiated to get tasks list.
+     */
     fun getTasks() {
         viewModelScope.launch {
-            val x = tasksUseCases.getTasksUseCases.invoke()
-            Log.e("Hh","$x")
-
+            val tasksDB = tasksUseCases.getTasksUseCases.invoke()
+            Log.e("task", "$tasksDB")
             _taskList.update { tasks ->
                 tasks.copy(
-                    taskList = x
+                    taskList = tasksDB
                 )
             }
-            Log.e("Hh","${_taskList.value}")
         }
     }
 
+    fun getTaskDetail(id: Int){
+        viewModelScope.launch {
+            val taskDetail = tasksUseCases.getTaskDetailUseCase.invoke(id)
+            _taskDetail.update {
+                it.copy(
+                    title = taskDetail!!.title,
+                    description = taskDetail.description
+                )
+            }
+        }
+    }
+
+    /**
+     * To add task
+     */
     fun insertTask(task: Task) {
         viewModelScope.launch {
             tasksUseCases.insertTaskUseCase.invoke(task)
+        }
+    }
+
+    fun deleteTask(task: Task){
+        viewModelScope.launch {
+            tasksUseCases.deleteTaskUseCase.invoke(task)
         }
     }
 

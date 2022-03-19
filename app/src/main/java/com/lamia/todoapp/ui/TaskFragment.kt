@@ -1,4 +1,5 @@
 package com.lamia.todoapp.ui
+
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -35,35 +36,27 @@ class TaskFragment : Fragment() {
 
         binding.viewModel = viewModel
 
-        binding.list.adapter = TaskAdapter()
+        binding.list.adapter = TaskAdapter {
+            viewModel.deleteTask(it)
+        }
 
         return binding.root
     }
 
+    /**
+     * call getTask() in onResume to refresh the list every time
+     */
     override fun onResume() {
-        binding.lifecycleOwner = this
-        binding.viewModel = viewModel
+        viewModel.getTasks()
         super.onResume()
 
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-//        val adapter = TaskAdapter{
-//            val action =
-//                TaskFragmentDirections.actionTaskFragmentToAddTaskFragment()
-//            this.findNavController().navigate(action)
-//        }
-
-//        binding.list.layoutManager = LinearLayoutManager(this.context)
-//        binding.list.adapter = adapter
-//
-//        viewModel.allTask.observe(this.viewLifecycleOwner){
-//            it.let {
-//                adapter.submitList(it)
-//            }
-//        }
-
+        /**
+         * Navigate to Add Task fragment
+         */
         binding.addTask.setOnClickListener {
             val action =
                 TaskFragmentDirections.actionTaskFragmentToAddTaskFragment()

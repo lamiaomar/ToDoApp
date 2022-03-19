@@ -10,7 +10,7 @@ import javax.inject.Inject
 
 class TaskRepository @Inject constructor(
     private val taskDao: TaskDao,
-    private val ioDispatcher  : CoroutineDispatcher = Dispatchers.IO
+    private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) {
 
     suspend fun deleteTask(task: Task) {
@@ -18,7 +18,7 @@ class TaskRepository @Inject constructor(
     }
 
     suspend fun getTasks(): List<Task> =
-        withContext(ioDispatcher){
+        withContext(ioDispatcher) {
             taskDao.getTasks()
         }
 
@@ -26,5 +26,10 @@ class TaskRepository @Inject constructor(
     suspend fun insertTask(task: Task) {
         return taskDao.insertTask(task)
     }
+
+    suspend fun getTaskDetail(id: Int): Task? =
+        withContext(ioDispatcher) {
+            taskDao.getTaskDetail(id)
+        }
 
 }

@@ -13,7 +13,11 @@ interface TaskDao {
     @Query("SELECT * FROM Task")
     fun getTasks() : List<Task>
 
+    @Query("SELECT * FROM TASK WHERE id = :id")
+    suspend fun getTaskDetail(id: Int): Task?
+
     @Delete
     suspend fun deleteTask(task: Task)
+
 
 }

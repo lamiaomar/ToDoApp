@@ -5,10 +5,7 @@ import android.content.Context
 import androidx.room.Room
 import com.lamia.todoapp.data.repo.TaskRepository
 import com.lamia.todoapp.data.source.TaskDataBase
-import com.lamia.todoapp.domain.DeleteTaskUseCase
-import com.lamia.todoapp.domain.GetTaskUseCase
-import com.lamia.todoapp.domain.InsertTaskUseCase
-import com.lamia.todoapp.domain.TasksUseCases
+import com.lamia.todoapp.domain.*
 import com.lamia.todoapp.util.DATABASE_NAME
 import dagger.Module
 import dagger.Provides
@@ -43,6 +40,7 @@ object AppModule {
     fun provideTaskUseCase(repository: TaskRepository): TasksUseCases{
         return TasksUseCases(
             getTasksUseCases = GetTaskUseCase(repository),
+            getTaskDetailUseCase = GetTaskDetailUseCase(repository),
             deleteTaskUseCase = DeleteTaskUseCase(repository),
             insertTaskUseCase = InsertTaskUseCase(repository)
         )
