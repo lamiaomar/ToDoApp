@@ -17,7 +17,7 @@ private const val ID = "id"
 @AndroidEntryPoint
 class TaskDetailFragment : Fragment() {
 
-  private val viewModel: TaskViewModel by activityViewModels()
+    private val viewModel: TaskViewModel by activityViewModels()
 
     private var taskId = 0
 
@@ -29,6 +29,7 @@ class TaskDetailFragment : Fragment() {
             taskId = it.getInt(ID)
         }
     }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -50,9 +51,12 @@ class TaskDetailFragment : Fragment() {
          * when the task updated use insertTask() function and navigate to home screen
          */
         binding.done.setOnClickListener {
-            val editTask = Task(id = taskId,
+            val editTask = Task(
+                id = taskId,
                 title = binding.titlee.text.toString(),
-                description = binding.descriptionn.text.toString())
+                description = binding.descriptionn.text.toString(),
+                timestamp = System.currentTimeMillis().toString()
+            )
             viewModel.insertTask(editTask)
             val action =
                 TaskDetailFragmentDirections.actionTaskDetailFragmentToTaskFragment()

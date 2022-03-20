@@ -18,6 +18,7 @@ data class Task(
     @PrimaryKey
     val id: Int? = null,
     val title: String = "",
+    val timestamp : String = "",
     val description: String = ""
 )
 

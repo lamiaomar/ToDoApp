@@ -1,17 +1,26 @@
 package com.lamia.todoapp.ui.adapter
 
 
+import android.provider.Settings.System.getString
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.cardview.widget.CardView
+import androidx.core.content.ContentProviderCompat
+import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.core.content.res.TypedArrayUtils
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.lamia.todoapp.R
 import com.lamia.todoapp.databinding.TaskBinding
 import com.lamia.todoapp.model.Task
+import com.lamia.todoapp.ui.TaskFragment
 import com.lamia.todoapp.ui.TaskFragmentDirections
+import dagger.hilt.android.qualifiers.ApplicationContext
+import kotlin.coroutines.coroutineContext
 
 class TaskAdapter (
     val delete: (task: Task) -> Unit
@@ -52,15 +61,22 @@ class TaskAdapter (
         val task = getItem(position)
         holder.bind(task)
 
+        /**
+         * when clicked in the card navigate to task detail screen
+         */
         holder.task.setOnClickListener {
             val action =
                 TaskFragmentDirections.actionTaskFragmentToTaskDetailFragment(task.id!!)
             holder.task.findNavController().navigate(action)
         }
 
+        /**
+         * to delete set the task as parameter for the adapter
+         * call notifyItemRemoved(position) to refresh the list
+         */
         holder.delete.setOnClickListener {
             delete(task)
-//            notifyItemRemoved(position)
+            notifyItemRemoved(position)
         }
     }
 
@@ -72,4 +88,5 @@ class TaskAdapter (
         )
 
     }
+
 }

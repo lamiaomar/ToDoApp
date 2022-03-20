@@ -13,8 +13,9 @@ class TaskRepository @Inject constructor(
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) {
 
-    suspend fun deleteTask(task: Task) {
-        return taskDao.deleteTask(task)
+    suspend fun deleteTask(task: Task) =
+        withContext(ioDispatcher){
+         taskDao.deleteTask(task)
     }
 
     suspend fun getTasks(): List<Task> =

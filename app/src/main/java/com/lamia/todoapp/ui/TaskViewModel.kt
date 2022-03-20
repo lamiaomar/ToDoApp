@@ -1,7 +1,12 @@
 package com.lamia.todoapp.ui
 
+import android.annotation.SuppressLint
 import android.util.Log
+import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.core.content.res.TypedArrayUtils.getString
 import androidx.lifecycle.*
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.lamia.todoapp.R
 import com.lamia.todoapp.domain.TasksUseCases
 import com.lamia.todoapp.model.Task
 import com.lamia.todoapp.model.Tasks
@@ -9,6 +14,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import javax.inject.Inject
 import kotlinx.coroutines.launch
+
+enum class ListState { EMPTY, NOT_EMPTY }
 
 @HiltViewModel
 class TaskViewModel @Inject constructor(
@@ -24,6 +31,10 @@ class TaskViewModel @Inject constructor(
     private val _taskDetail = MutableStateFlow(Task())
     val taskDetail: StateFlow<Task> = _taskDetail.asStateFlow()
 
+    //    UI state
+    private val _status = MutableLiveData<ListState>()
+    val status: LiveData<ListState> = _status
+
     init {
         getTasks()
     }
@@ -34,17 +45,22 @@ class TaskViewModel @Inject constructor(
      */
     fun getTasks() {
         viewModelScope.launch {
+
             val tasksDB = tasksUseCases.getTasksUseCases.invoke()
-            Log.e("task", "$tasksDB")
-            _taskList.update { tasks ->
-                tasks.copy(
-                    taskList = tasksDB
-                )
+            if (tasksDB.isEmpty()) {
+                _status.value = ListState.EMPTY
+            }else{
+                Log.e("task", "$tasksDB")
+                _taskList.update { tasks ->
+                    tasks.copy(
+                        taskList = tasksDB
+                    )
+                }
             }
         }
     }
 
-    fun getTaskDetail(id: Int){
+    fun getTaskDetail(id: Int) {
         viewModelScope.launch {
             val taskDetail = tasksUseCases.getTaskDetailUseCase.invoke(id)
             _taskDetail.update {
@@ -65,7 +81,7 @@ class TaskViewModel @Inject constructor(
         }
     }
 
-    fun deleteTask(task: Task){
+    fun deleteTask(task: Task) {
         viewModelScope.launch {
             tasksUseCases.deleteTaskUseCase.invoke(task)
         }

@@ -1,18 +1,13 @@
 package com.lamia.todoapp.ui
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.lamia.todoapp.R
 import com.lamia.todoapp.databinding.FragmentTaskBinding
-import com.lamia.todoapp.model.Task
 import com.lamia.todoapp.ui.adapter.TaskAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_task.*
@@ -36,8 +31,11 @@ class TaskFragment : Fragment() {
 
         binding.viewModel = viewModel
 
+
         binding.list.adapter = TaskAdapter {
             viewModel.deleteTask(it)
+            //call onResume() to refresh the list
+            onResume()
         }
 
         return binding.root
@@ -64,4 +62,5 @@ class TaskFragment : Fragment() {
         }
 
     }
+
 }

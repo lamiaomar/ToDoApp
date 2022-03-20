@@ -14,11 +14,3 @@ fun bindList(
     adapter.submitList(data)
 }
 
-//@BindingAdapter("list")
-//fun bindList(
-//    recyclerView: RecyclerView,
-//    data: List<Task>?,
-//) {
-//    val adapter = recyclerView.adapter as TaskAdapter
-//    adapter.submitList(data)
-//}

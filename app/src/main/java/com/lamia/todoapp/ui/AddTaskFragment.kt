@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import com.lamia.todoapp.R
@@ -34,15 +35,26 @@ class AddTaskFragment : Fragment() {
 
         return binding.root
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         binding.done.setOnClickListener {
-            val task = Task(title = titlee.text.toString(), description = descriptionn.text.toString())
-            viewModel.insertTask(task)
-            val action =
-                AddTaskFragmentDirections.actionAddTaskFragmentToTaskFragment()
-            done.findNavController().navigate(action)
+            if (titlee.text.toString().isEmpty()) {
+                Toast.makeText(this.context, "You have to fill the title", Toast.LENGTH_SHORT)
+                    .show()
+            } else {
+                val task = Task(
+                    title = titlee.text.toString(),
+                    description = descriptionn.text.toString(),
+                    timestamp = System.currentTimeMillis().toString()
+                )
+                viewModel.insertTask(task)
+                val action =
+                    AddTaskFragmentDirections.actionAddTaskFragmentToTaskFragment()
+                done.findNavController().navigate(action)
+            }
+
         }
 
     }
