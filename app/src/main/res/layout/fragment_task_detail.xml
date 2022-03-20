@@ -15,34 +15,36 @@
         android:layout_height="match_parent"
         tools:context="com.example.android.marsphotos.overview.OverViewFragment">
 
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/title"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="176dp"
-            android:layout_height="55dp"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.15"
+            app:layout_constraintHorizontal_bias="0.454"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toBottomOf="@+id/imageView4">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/titlee"
-                android:text="@{viewModel.taskDetail.title}"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:backgroundTint="#E6E2E2"
+                android:text="@{viewModel.taskDetail.title}"
                 tools:layout_editor_absoluteX="51dp"
                 tools:layout_editor_absoluteY="121dp" />
 
 
         </com.google.android.material.textfield.TextInputLayout>
 
-
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/description"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
-            android:layout_height="55dp"
+            android:layout_height="wrap_content"
+            android:minHeight="150dp"
             android:layout_marginTop="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.406"
@@ -53,11 +55,11 @@
                 android:id="@+id/descriptionn"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:minHeight="150dp"
                 android:backgroundTint="#E6E2E2"
                 android:text="@{viewModel.taskDetail.description}"
                 tools:layout_editor_absoluteX="51dp"
                 tools:layout_editor_absoluteY="121dp" />
-
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -71,9 +73,19 @@
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/description"
-            app:layout_constraintVertical_bias="0.141" />
+            app:layout_constraintVertical_bias="0.20999998" />
 
-<!--        <TextView-->
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="307dp"
+            android:layout_height="402dp"
+            android:layout_marginTop="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/detal1" />
+
+        <!--        <TextView-->
 <!--            android:id="@+id/time"-->
 <!--            android:layout_width="wrap_content"-->
 <!--            android:layout_height="wrap_content"-->

@@ -1,12 +1,7 @@
 package com.lamia.todoapp.ui
 
-import android.annotation.SuppressLint
 import android.util.Log
-import androidx.core.content.ContentProviderCompat.requireContext
-import androidx.core.content.res.TypedArrayUtils.getString
 import androidx.lifecycle.*
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.lamia.todoapp.R
 import com.lamia.todoapp.domain.TasksUseCases
 import com.lamia.todoapp.model.Task
 import com.lamia.todoapp.model.Tasks
@@ -48,8 +43,10 @@ class TaskViewModel @Inject constructor(
 
             val tasksDB = tasksUseCases.getTasksUseCases.invoke()
             if (tasksDB.isEmpty()) {
+                //to display emptyList photo
                 _status.value = ListState.EMPTY
             }else{
+                _status.value = ListState.NOT_EMPTY
                 Log.e("task", "$tasksDB")
                 _taskList.update { tasks ->
                     tasks.copy(

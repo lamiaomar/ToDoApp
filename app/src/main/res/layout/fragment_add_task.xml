@@ -15,16 +15,17 @@
         android:layout_height="match_parent"
         tools:context="com.example.android.marsphotos.overview.OverViewFragment">
 
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/title"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="176dp"
-            android:layout_height="55dp"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
             android:hint="title"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.15"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toBottomOf="@+id/imageView">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/titlee"
@@ -37,13 +38,13 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/description"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="55dp"
+            android:layout_width="400dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+            android:minHeight="150dp"
             android:hint="Description"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.406"
@@ -53,7 +54,8 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/descriptionn"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="150dp"
                 android:backgroundTint="#E6E2E2"
                 tools:layout_editor_absoluteX="51dp"
                 tools:layout_editor_absoluteY="121dp" />
@@ -63,15 +65,24 @@
 
         <Button
             android:id="@+id/done"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="100dp"
+            android:layout_height="60dp"
             android:text="Done"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/description"
-            app:layout_constraintVertical_bias="0.141" />
+            app:layout_constraintVertical_bias="0.385" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="216dp"
+            android:layout_height="328dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/addtask" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
