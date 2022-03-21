@@ -35,6 +35,7 @@ class TaskDetailFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         binding = FragmentTaskDetailBinding.inflate(inflater)
 
         binding.lifecycleOwner = this

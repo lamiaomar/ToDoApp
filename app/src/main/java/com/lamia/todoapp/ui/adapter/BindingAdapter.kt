@@ -2,6 +2,7 @@ package com.lamia.todoapp.ui.adapter
 
 import android.view.View
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.lamia.todoapp.R
@@ -22,18 +23,33 @@ fun bindList(
 @BindingAdapter("listStatus")
 fun bindStatus(
     statusImageView: ImageView,
+//  statusTextView: TextView,
     status: ListState?
 ) {
-
     when (status) {
-        ListState.EMPTY-> {
+        ListState.EMPTY -> {
             statusImageView.visibility = View.VISIBLE
-            statusImageView.setImageResource(R.drawable.emptylist1)
+        //  statusTextView.visibility = View.VISIBLE
+            statusImageView.setImageResource(R.drawable.emplist)
         }
 
         ListState.NOT_EMPTY -> {
             statusImageView.visibility = View.INVISIBLE
-//            statusImageView.setImageResource(R.drawable.)
+        }
+    }
+}
+
+@BindingAdapter("listStatusText")
+fun bindStatus(
+    statusTextView: TextView,
+    status: ListState?
+) {
+    when (status) {
+        ListState.EMPTY -> {
+            statusTextView.visibility = View.VISIBLE
+        }
+        ListState.NOT_EMPTY -> {
+            statusTextView.visibility = View.INVISIBLE
         }
     }
 

@@ -38,7 +38,7 @@ class AddTaskFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        setHasOptionsMenu(true)
         binding.done.setOnClickListener {
             if (titlee.text.toString().isEmpty()) {
                 Toast.makeText(this.context, "You have to fill the title", Toast.LENGTH_SHORT)

@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.addCallback
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import com.lamia.todoapp.databinding.FragmentTaskBinding
@@ -30,7 +31,6 @@ class TaskFragment : Fragment() {
         binding.lifecycleOwner = this
 
         binding.viewModel = viewModel
-
 
         binding.list.adapter = TaskAdapter {
             viewModel.deleteTask(it)
