@@ -46,6 +46,7 @@ class TaskFragment : Fragment() {
      */
     override fun onResume() {
         viewModel.getTasks()
+        viewModel.taskList
         super.onResume()
 
     }
