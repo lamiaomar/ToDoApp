@@ -40,12 +40,11 @@ class TaskViewModel @Inject constructor(
      */
     fun getTasks() {
         viewModelScope.launch {
-
             val tasksDB = tasksUseCases.getTasksUseCases.invoke()
             if (tasksDB.isEmpty()) {
                 //to display emptyList photo
                 _status.value = ListState.EMPTY
-            }else{
+            } else {
                 _status.value = ListState.NOT_EMPTY
                 Log.e("task", "$tasksDB")
                 _taskList.update { tasks ->
@@ -57,6 +56,9 @@ class TaskViewModel @Inject constructor(
         }
     }
 
+    /**
+     * get single task from the list by task id
+     */
     fun getTaskDetail(id: Int) {
         viewModelScope.launch {
             val taskDetail = tasksUseCases.getTaskDetailUseCase.invoke(id)
@@ -78,9 +80,24 @@ class TaskViewModel @Inject constructor(
         }
     }
 
+    /**
+     * To delete task and update the list
+     * and check if the list is empty to display empty list photo
+     */
     fun deleteTask(task: Task) {
         viewModelScope.launch {
             tasksUseCases.deleteTaskUseCase.invoke(task)
+
+            if (tasksUseCases.getTasksUseCases.invoke().isEmpty()) {
+                _status.value = ListState.EMPTY
+            } else {
+                _taskList.update {
+                    it.copy(
+                        taskList = tasksUseCases.getTasksUseCases.invoke()
+                    )
+                }
+                _status.value = ListState.NOT_EMPTY
+            }
         }
     }
 

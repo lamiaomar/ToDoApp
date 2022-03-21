@@ -41,6 +41,7 @@ class TaskDetailFragment : Fragment() {
         binding.lifecycleOwner = this
 
         binding.viewModel = viewModel
+
         viewModel.getTaskDetail(taskId)
 
         return binding.root

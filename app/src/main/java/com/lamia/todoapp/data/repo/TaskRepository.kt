@@ -8,6 +8,9 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
+/**
+ * Task repository contains 4 functions that are present in Task Dao
+ */
 class TaskRepository @Inject constructor(
     private val taskDao: TaskDao,
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
@@ -22,7 +25,6 @@ class TaskRepository @Inject constructor(
         withContext(ioDispatcher) {
             taskDao.getTasks()
         }
-
 
     suspend fun insertTask(task: Task) {
         return taskDao.insertTask(task)

@@ -18,7 +18,10 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object AppModule {
 
-    //in the parameter context or application
+    // *in the parameter context or application
+    /**
+     * Tell hilt how to provide task database object
+     */
     @Provides
     @Singleton
     fun provideTaskDatabase(@ApplicationContext context: Context) : TaskDataBase{
@@ -29,12 +32,18 @@ object AppModule {
         ).build()
     }
 
+    /**
+     * Provide repository and take as parameter TaskDao object
+     */
     @Provides
     @Singleton
     fun provideTaskRepo(database : TaskDataBase): TaskRepository{
         return TaskRepository(database.getTaskDao())
     }
 
+    /**
+     * Provide TasksUseCase which have 4 use cases
+     */
     @Provides
     @Singleton
     fun provideTaskUseCase(repository: TaskRepository): TasksUseCases{

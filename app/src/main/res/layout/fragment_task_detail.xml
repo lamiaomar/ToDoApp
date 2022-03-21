@@ -69,7 +69,7 @@
 
         <Button
             android:id="@+id/done"
-            android:layout_width="375dp"
+            android:layout_width="370dp"
             android:layout_height="55dp"
             android:layout_marginTop="16dp"
             android:text="Done"
